@@ -1,0 +1,8 @@
+{
+  "name": "yankee-shindan-tools",
+  "version": "1.0.0",
+  "description": "ヤンキータイプ診断のアセット再生成スクリプト",
+  "private": true,
+  "scripts": { "build": "node build-assets.js" },
+  "dependencies": { "pngjs": "^7.0.0" }
+}

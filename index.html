@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ヤンキータイプ診断 🔥 あなたの中のヤンキー、何型？</title>
+<meta name="description" content="12問に答えるだけで、あなたの中に眠るヤンキーを16タイプに分類。強面なのに中身は残念…？決め台詞つきで診断します。">
+<link rel="icon" type="image/png" href="img/KOAS.png">
+<link rel="apple-touch-icon" href="img/KOAS.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ヤンキータイプ診断">
+<meta property="og:title" content="ヤンキータイプ診断 🔥 あなたの中のヤンキー、何型？">
+<meta property="og:description" content="12問で判定！あなたは特攻隊長？めそめそレディース番長？強面×残念ギャップの16タイプ診断。">
+<meta property="og:url" content="https://yankee.soter-info.com/">
+<meta property="og:image" content="https://yankee.soter-info.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ヤンキータイプ診断 🔥 あなたの中のヤンキー、何型？">
+<meta name="twitter:description" content="12問で判定！強面×残念ギャップの16タイプ診断。決め台詞つき。">
+<meta name="twitter:image" content="https://yankee.soter-info.com/og.png">
+<style>
+  :root {
+    --bg: #17141b;
+    --card: #221d29;
+    --card2: #2b2533;
+    --gold: #e3b23c;
+    --gold-dark: #c8952a;
+    --red: #d64545;
+    --text: #f3eee4;
+    --text-light: #a79c8c;
+    --border: #3a3342;
+    --shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 12% 15%, rgba(227,178,60,0.08) 0 140px, transparent 140px),
+      radial-gradient(circle at 88% 85%, rgba(214,69,69,0.10) 0 170px, transparent 170px);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.7;
+  }
+  .wrap { width: 100%; max-width: 520px; padding: 24px 16px 48px; flex: 1; }
+  .catch-copy {
+    position: relative;
+    text-align: center;
+    font-size: clamp(18px, 5vw, 24px);
+    line-height: 1.45;
+    font-weight: 900;
+    color: var(--gold);
+    background: #100e14;
+    border: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 13px 22px;
+    width: fit-content;
+    margin: 4px auto 16px;
+    box-shadow: var(--shadow);
+    letter-spacing: 1px;
+    text-shadow: 0 2px 0 rgba(0,0,0,.5);
+  }
+  .catch-copy::after {
+    content: "";
+    position: absolute; left: 50%; bottom: -10px;
+    transform: translateX(-50%);
+    border: 9px solid transparent; border-top-color: var(--gold); border-bottom: none;
+  }
+  .paw-header {
+    text-align: center; font-size: 12px; color: var(--red);
+    letter-spacing: 4px; margin-bottom: 4px; font-weight: bold;
+  }
+  h1.site-title {
+    text-align: center; font-size: 28px; color: var(--gold);
+    margin-bottom: 20px; letter-spacing: 2px; font-weight: 900;
+    text-shadow: 0 2px 0 #000, 0 0 12px rgba(227,178,60,.3);
+  }
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 22px;
+    border: 2px solid var(--border);
+    border-top: 4px solid var(--gold);
+  }
+  .screen { display: none; animation: fadein .35s ease; }
+  .screen.active { display: block; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+
+  .hero-emoji { font-size: 64px; text-align: center; margin: 8px 0 12px; }
+  .hero-emoji img { width: 150px; height: 150px; object-fit: contain; }
+  .hero-emoji svg { width: 140px; height: 140px; }
+  .lead { text-align: center; font-size: 15px; color: var(--text-light); margin-bottom: 20px; }
+  .lead strong { color: var(--gold); }
+  .name-label { font-size: 14px; font-weight: bold; margin-bottom: 6px; display: block; }
+  input#uname {
+    width: 100%; font-size: 16px; padding: 12px 16px;
+    border: 2px solid var(--border); border-radius: 8px; outline: none;
+    background: #14121a; color: var(--text); margin-bottom: 20px; font-family: inherit;
+  }
+  input#uname:focus { border-color: var(--gold); }
+  .btn {
+    display: block; width: 100%; padding: 15px; font-size: 17px; font-weight: 900;
+    font-family: inherit; color: #17141b;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border: none; border-radius: 8px; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(227,178,60,.3); letter-spacing: 1px;
+    transition: transform .15s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn.secondary {
+    background: none; color: var(--gold); border: 2px solid var(--gold);
+    box-shadow: none; margin-top: 12px;
+  }
+  .btn.ghost {
+    background: none; color: var(--text-light); border: none; box-shadow: none;
+    font-size: 14px; margin-top: 8px; text-decoration: underline; font-weight: bold;
+  }
+
+  .progress-track { height: 10px; background: #14121a; border-radius: 999px; overflow: hidden; margin-bottom: 6px; border: 1px solid var(--border); }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--red), var(--gold)); border-radius: 999px; transition: width .3s ease; }
+  .progress-text { text-align: right; font-size: 12px; color: var(--text-light); margin-bottom: 16px; }
+  .q-emoji { font-size: 44px; text-align: center; margin-bottom: 8px; }
+  .q-text { font-size: 18px; font-weight: bold; text-align: center; margin-bottom: 22px; min-height: 3.2em; }
+  .opt {
+    display: block; width: 100%; text-align: left; font-size: 15px; font-family: inherit;
+    font-weight: bold; color: var(--text); background: var(--card2);
+    border: 2px solid var(--border); border-radius: 10px; padding: 16px 18px;
+    margin-bottom: 12px; cursor: pointer; transition: border-color .15s, background .15s, transform .1s;
+  }
+  .opt:hover { border-color: var(--gold); background: #332b3d; }
+  .opt:active { transform: scale(.98); }
+  .back-link { background: none; border: none; cursor: pointer; font-size: 13px; color: var(--text-light); font-family: inherit; text-decoration: underline; margin-top: 4px; }
+
+  .result-card {
+    text-align: center; border: 2px solid var(--gold); border-radius: 12px;
+    padding: 24px 16px; background: linear-gradient(160deg, #241d18, #1c1722); margin-bottom: 20px;
+  }
+  .result-for { font-size: 14px; color: var(--text-light); }
+  .result-emoji { font-size: 72px; margin: 6px 0; }
+  .result-emoji img { width: 190px; height: 190px; object-fit: contain; }
+  .result-emoji svg { width: 180px; height: 180px; }
+  .result-code { display: inline-block; font-size: 13px; font-weight: bold; letter-spacing: 3px; color: #17141b; background: var(--red); border-radius: 999px; padding: 3px 14px; margin-bottom: 6px; }
+  .result-name { font-size: 25px; font-weight: 900; color: var(--gold); margin-bottom: 4px; text-shadow: 0 2px 0 #000; }
+  .result-catch { font-size: 14px; color: var(--text-light); margin-bottom: 12px; }
+  .mic-box {
+    margin: 14px 0 2px; padding: 14px 16px; border-radius: 10px;
+    background: #100e14; border: 1px dashed var(--red);
+    font-size: 16px; font-weight: bold; color: var(--gold); line-height: 1.6; text-align: left;
+  }
+  .mic-box .mic-label { display: block; font-size: 11px; color: var(--red); letter-spacing: 2px; margin-bottom: 4px; }
+  .axis-bars { text-align: left; margin: 16px 0 4px; }
+  .axis-row { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-light); margin-bottom: 6px; }
+  .axis-row .lab { width: 66px; text-align: right; }
+  .axis-row .lab.r { text-align: left; }
+  .axis-track { flex: 1; height: 8px; background: #14121a; border-radius: 999px; position: relative; border: 1px solid var(--border); }
+  .axis-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: var(--gold); border: 3px solid #17141b; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+  .section-title { font-size: 15px; font-weight: 900; color: var(--gold); margin: 18px 0 6px; display: flex; align-items: center; gap: 6px; }
+  .desc, .tip { font-size: 14.5px; text-align: left; }
+  .match-box { background: var(--card2); border-radius: 10px; padding: 12px 16px; font-size: 14px; text-align: left; margin-top: 6px; }
+  .share-row { display: flex; gap: 10px; margin-top: 22px; }
+  .share-btn { flex: 1; padding: 12px 6px; font-size: 14px; font-weight: bold; font-family: inherit; border: none; border-radius: 8px; cursor: pointer; color: #fff; }
+  .share-x { background: #000; border: 1px solid #444; }
+  .share-line { background: #06c755; }
+  .share-copy { background: var(--red); }
+
+  .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .type-cell { background: var(--card2); border: 2px solid var(--border); border-radius: 10px; padding: 12px 8px; text-align: center; }
+  .type-cell .te { font-size: 30px; }
+  .type-cell .te img { width: 96px; height: 96px; object-fit: contain; }
+  .type-cell .te svg { width: 92px; height: 92px; }
+  .type-cell .tc { font-size: 10px; letter-spacing: 2px; color: var(--text-light); }
+  .type-cell .tn { font-size: 12px; font-weight: bold; color: var(--gold); line-height: 1.4; }
+
+  footer { width: 100%; max-width: 520px; padding: 0 20px 28px; font-size: 10.5px; color: #6b6273; text-align: center; line-height: 1.8; }
+  footer b { color: #8a8094; }
+  .toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); background: var(--gold); color: #17141b; font-size: 13px; font-weight: bold; padding: 10px 22px; border-radius: 999px; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 10; }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="catch-copy">あんたも、ヤンキーの魂を持ってねぇか？</div>
+  <div class="paw-header">━ 夜露死苦研究所 ━</div>
+  <h1 class="site-title">ヤンキータイプ診断</h1>
+
+  <div class="card">
+    <!-- START -->
+    <section id="screen-start" class="screen active">
+      <div class="hero-emoji" id="hero-emoji">🔥</div>
+      <p class="lead">
+        12個の質問に答えるだけで、<br>
+        あなたの中に眠るヤンキーを<br>
+        <strong>16タイプ</strong>に分類するぜ。<br>
+        <strong>1分間最強</strong>のあんたなら、2分の診断とか余裕だろ？
+      </p>
+      <label class="name-label" for="uname">あんたの名前（ニックネームでOK）</label>
+      <input id="uname" type="text" maxlength="12" placeholder="例：カズヤ" autocomplete="off">
+      <button class="btn" onclick="startQuiz()">診断をはじめる 🔥</button>
+      <button class="btn ghost" onclick="showAllTypes()">全16タイプを見てみる</button>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="screen-quiz" class="screen">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text"></div>
+      <div class="q-emoji" id="q-emoji"></div>
+      <div class="q-text" id="q-text"></div>
+      <div id="q-options"></div>
+      <button class="back-link" id="q-back" onclick="goBack()">← ひとつ前の質問に戻る</button>
+    </section>
+
+    <!-- RESULT -->
+    <section id="screen-result" class="screen">
+      <div class="result-card" id="result-card">
+        <div class="result-for" id="result-for"></div>
+        <div class="result-emoji" id="result-emoji"></div>
+        <div class="result-code" id="result-code"></div>
+        <div class="result-name" id="result-name"></div>
+        <div class="result-catch" id="result-catch"></div>
+        <div class="axis-bars" id="axis-bars"></div>
+      </div>
+
+      <div class="mic-box"><span class="mic-label">🎤 マイクパフォーマンス</span><span id="result-mic"></span></div>
+
+      <div class="section-title">📖 どんなヤンキー？</div>
+      <p class="desc" id="result-desc"></p>
+
+      <div class="section-title">💡 ワンポイント</div>
+      <p class="tip" id="result-tip"></p>
+
+      <div class="section-title">🤝 相性のいいタイプ</div>
+      <div class="match-box" id="result-match"></div>
+
+      <button class="btn" style="margin-top:22px" onclick="saveResultImage()">📸 結果を画像で保存・シェア</button>
+      <div class="share-row">
+        <button class="share-btn share-x" onclick="shareX()">Xでシェア</button>
+        <button class="share-btn share-line" onclick="shareLine()">LINEで送る</button>
+        <button class="share-btn share-copy" onclick="copyResult()">コピー</button>
+      </div>
+
+      <button class="btn secondary" onclick="restart()">もう一度診断する</button>
+      <button class="btn ghost" onclick="showAllTypes()">全16タイプを見てみる</button>
+    </section>
+
+    <!-- ALL TYPES -->
+    <section id="screen-all" class="screen">
+      <div class="section-title" style="margin-top:0">🏍️ 全16タイプずかん</div>
+      <div class="type-grid" id="type-grid"></div>
+      <button class="btn secondary" onclick="backToTop()">トップに戻る</button>
+    </section>
+  </div>
+</div>
+
+<footer>
+  ※本診断は<b>エンターテインメントコンテンツ</b>です。学術的な性格検査ではなく、特定の人物・団体を貶める意図はありません。暴力・犯罪行為を推奨するものでもありません。<br>
+  ※MBTI®は The Myers-Briggs Company および一般社団法人日本MBTI協会の登録商標です。本サイトは同商標および関連団体とは<b>一切関係ありません</b>。<br>
+  ※本サイトは利用状況の把握のためアクセス解析（Google Analytics）を使用しています。データは匿名で収集されます。
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------- 4軸 ----------
+// 1軸 スタンス: 硬派(K) / 軟派(N)
+// 2軸 立ち位置: 番長(B) / 一匹狼(O)
+// 3軸 気質: 熱血(A) / クール(C)
+// 4軸 戦い方: 武闘派(T) / 知略派(S)
+const AXES = [
+  { left: { key: "K", label: "硬派" },   right: { key: "N", label: "軟派" } },
+  { left: { key: "B", label: "番長" },   right: { key: "O", label: "一匹狼" } },
+  { left: { key: "A", label: "熱血" },   right: { key: "C", label: "クール" } },
+  { left: { key: "T", label: "武闘派" }, right: { key: "S", label: "知略派" } },
+];
+
+const QUESTIONS = [
+  // 軸1 K/N
+  { axis: 0, emoji: "🧥", text: "服装のこだわりは？",
+    a: { t: "黒で統一。硬派に決めるのが筋だろ", p: "K" },
+    b: { t: "流行りも取り入れて派手めにキメる", p: "N" } },
+  { axis: 0, emoji: "🛣️", text: "自分の信念について",
+    a: { t: "曲げねぇ。筋は絶対に通す", p: "K" },
+    b: { t: "その場の空気で柔軟に変える", p: "N" } },
+  { axis: 0, emoji: "🤝", text: "初対面の相手には？",
+    a: { t: "あまり笑わず、まず様子見", p: "K" },
+    b: { t: "とりあえずフレンドリーに絡む", p: "N" } },
+  // 軸2 B/O
+  { axis: 1, emoji: "👥", text: "集団の中にいると…",
+    a: { t: "自然と中心・仕切り役になっている", p: "B" },
+    b: { t: "一人でいる方が落ち着く", p: "O" } },
+  { axis: 1, emoji: "🗳️", text: "決めごとをするとき",
+    a: { t: "みんなを引っ張って決める", p: "B" },
+    b: { t: "自分の分は自分で勝手に決める", p: "O" } },
+  { axis: 1, emoji: "🌙", text: "休みの日の過ごし方は？",
+    a: { t: "大人数で集まってワイワイ", p: "B" },
+    b: { t: "一人か少人数でまったり", p: "O" } },
+  // 軸3 A/C
+  { axis: 2, emoji: "🎭", text: "感情の出方は？",
+    a: { t: "喜怒哀楽が全部、顔と態度に出る", p: "A" },
+    b: { t: "あまり顔に出さず、クールを装う", p: "C" } },
+  { axis: 2, emoji: "🔥", text: "何かに挑むとき",
+    a: { t: "勢いと気合で突っ込む", p: "A" },
+    b: { t: "冷静に淡々とこなす", p: "C" } },
+  { axis: 2, emoji: "🚨", text: "仲間がピンチのとき",
+    a: { t: "考えるより先に体が動く", p: "A" },
+    b: { t: "落ち着いて最善策を探す", p: "C" } },
+  // 軸4 T/S
+  { axis: 3, emoji: "💥", text: "問題を解決するなら",
+    a: { t: "正面から力でぶつかる", p: "T" },
+    b: { t: "頭を使って攻略する", p: "S" } },
+  { axis: 3, emoji: "🎲", text: "勝負ごとで頼るのは？",
+    a: { t: "根性と勢い", p: "T" },
+    b: { t: "作戦と読み", p: "S" } },
+  { axis: 3, emoji: "🧩", text: "困難にぶつかったら",
+    a: { t: "とにかく行動あるのみ", p: "T" },
+    b: { t: "まず情報を集めて分析する", p: "S" } },
+];
+
+// ---------- 16タイプ（コード = K/N B/O A/C T/S） ----------
+const TYPES = {
+  "KBAT": { emoji: "😤", name: "情緒不安定な特攻隊長", catch: "燃えてるのか泣いてるのか、本人も不明",
+    mic: "試合決定で気持ちいい殴り合いできそう…エクスタシー感じるね〜…って、あれ、なんで涙出てんだよ俺！！どっちだよ！！",
+    desc: "硬派で熱血、仲間を率いて先陣を切る特攻隊長。ただし感情がジェットコースターで、キレた3秒後に号泣していることも。裏表がなさすぎる。",
+    tip: "その情の深さが最大の武器。感情が高ぶったら一回深呼吸。落ち着けば無敵の兄貴分だぜ。",
+    match: "😭 情に厚すぎて泣く兄貴（NBAT）とは涙の量で張り合える" },
+  "KBAS": { emoji: "👑", name: "強奪系レディース女帝", catch: "この街の物は全部アタシの物",
+    mic: "アタシに逆らうヤツは全員シバく。……あ、そのタピオカちょうだい。これももらうわ。全部アタシの物。",
+    desc: "硬派で頭も回る女帝気質。人の物を堂々と「もらう」支配者だが、なぜか憎めず、いざという時は妹分たちを全力で守る。異名は「全部もらうネキ」。",
+    tip: "その統率力は本物。たまには自分の物を気前よく配れば、真のカリスマ女帝になれるわよ。",
+    match: "💰 実家が太い偽ワル（NBCS）から色々“もらえる”おいしい関係" },
+  "KBCT": { emoji: "🧹", name: "潔癖すぎるレディース総長", catch: "この道にゴミ一つ、許さないわよ",
+    mic: "1分でわからせるわよ。……ちょっと、そこ土足で上がんないで。拭いて。今すぐ拭いて。わからせるのはそれから。",
+    desc: "硬派でクール、武闘派のレディース総長。なのに極度の潔癖症で、たまり場は常にピカピカ。掃除の腕は右に出る者なし。強くて清潔な女番長。",
+    tip: "その几帳面さ、実は最強のリーダー資質。潔癖を人に強要しすぎないのが円満のコツよ。",
+    match: "🎮 見た目だけレディース番長・中身小学生（NBAS）の散らかしに手を焼く" },
+  "KBCS": { emoji: "🤔", name: "語彙力ゼロのクール参謀", catch: "頭は切れる、口は回らない",
+    mic: "アタシの頭脳の前じゃ全部…その…アレよ…なんだっけ…とにかくアレなの。察して。",
+    desc: "硬派・クール・知略派の女参謀。作戦を立てる頭脳はあるのに、言葉にする語彙が壊滅的。「アレ」「それ」「アレよ」で全部済ませる無口な軍師。",
+    tip: "伝わらないのは損。図やジェスチャーを添えるだけで、あんたの天才ぶりが世に出るわよ。",
+    match: "😢 めそめそレディース番長（NOCS）とは無言でも通じ合う" },
+  "KOAT": { emoji: "🙇", name: "すぐ謝る武闘派", catch: "拳を上げてから、秒で下げる",
+    mic: "表出ろや！試合決定な！気持ちいい殴り合い…って、あの、やっぱ配信でよくないすか？すいませんでした！！奢ります！",
+    desc: "硬派・熱血・武闘派の一匹狼。気は荒いのに気は優しく、拳を振り上げた次の瞬間には土下座級の謝罪。喧嘩は強いが心は豆腐。",
+    tip: "その優しさは弱さじゃない。謝る前に一呼吸、本当に悪いか見極めよう。強さと優しさは両立するぜ。",
+    match: "🥺 陰キャレディース一匹狼（KOCS）とは気を遣い合って一生譲り合う" },
+  "KOAS": { emoji: "💸", name: "カツアゲ未遂リーゼント", catch: "脅すつもりが、なぜか奢る側",
+    mic: "ペイペイだせや…って言おうとしたけど、俺のQRコード読み取ってくれる？逆にチャージするわ。",
+    desc: "デカいリーゼントで硬派を気取る一匹狼。凄もうとするが気が弱すぎて毎回失敗し、逆に奢ってしまう愛されキャラ。異名は「逆チャージニキ」。",
+    tip: "その気弱さは優しさの裏返し。無理に凄まなくていい。あんたは奢る側で輝くタイプだ。",
+    match: "🌸 女々しいスキンヘッド（KOCT）と心優しきコンビ" },
+  "KOCT": { emoji: "🌸", name: "女々しいスキンヘッド", catch: "強面の下に、乙女がいる",
+    mic: "ナメてんのかコラ、シバくぞ。……えへへ、でもそのお花かわいいね…写真撮っていい…？",
+    desc: "スキンヘッドに傷、見た目は極めて硬派。なのに中身は繊細な乙女で、花や小動物にキュンとする。ギャップで街の人気者。",
+    tip: "その感受性は素敵な才能。強面を気にせず好きなものを堂々と愛でよう。ギャップは魅力だ。",
+    match: "💸 カツアゲ未遂リーゼント（KOAS）と譲り合いの美しい関係" },
+  "KOCS": { emoji: "🥺", name: "陰キャレディース一匹狼", catch: "群れない、けど…さみしい",
+    mic: "アタシ、群れない主義だから。……別に、誘ってくれてもいいけど…来ないの…？既読だけ…？",
+    desc: "硬派・クール・知略派の一匹狼レディース。孤高を気取るが、本当はめちゃくちゃ構ってほしい。誘われないと一人でいじける、ツンデレの極み。",
+    tip: "素直に「混ぜて」と言えば世界が変わる。あんたの本音、みんな待ってるわよ。",
+    match: "🙇 すぐ謝る武闘派（KOAT）とは遠慮し合ってなかなか近づけない" },
+  "NBAT": { emoji: "😭", name: "情に厚すぎて泣く兄貴", catch: "涙腺、常に決壊寸前",
+    mic: "お前ら…試合前だってのに、よく集まってくれた…（涙）…もうダメだ泣くわ…エクスタシーより先に涙が…ありがとうな…！",
+    desc: "軟派で社交的、熱血武闘派の兄貴分。とにかく涙もろく、仲間の話や感動的なCMで即号泣。面倒見は16タイプ随一で、界隈での異名は「号泣ニキ」。",
+    tip: "その涙は人望の証。ただし感動の押し売りは程々に。あんたの背中はもう十分アツいぜ。",
+    match: "😤 情緒不安定な特攻隊長（KBAT）とは号泣タッグを結成" },
+  "NBAS": { emoji: "🎮", name: "見た目だけレディース番長（中身小学生）", catch: "凄み満点、精神年齢10歳",
+    mic: "喧嘩自慢？アタシはゲーム自慢よ。昨日全国3位だから。1分どころか30秒でわからせるわよ？ゲームでね。",
+    desc: "軟派・熱血・知略派のレディース番長。見た目は威圧感抜群なのに、中身は無邪気な小学生。ゲームとお菓子とイタズラが大好きで、ノリだけは天下一品。",
+    tip: "その純粋さは人を惹きつける魅力。子供心を保ちつつ、たまに大人の顔も見せると無敵よ。",
+    match: "🧹 潔癖すぎるレディース総長（KBCT）に毎回片付けさせてしまう" },
+  "NBCT": { emoji: "🫣", name: "ビビりのカリスマレディース総長", catch: "オーラは満点、度胸は0点",
+    mic: "2秒で終わらせるわ。……あ、G（虫）。無理。今日は解散。エクスタシーとか以前に無理。またね。",
+    desc: "軟派・クール・武闘派のレディース総長。立ち姿とオーラは完璧なカリスマなのに、虫一匹・お化け一つで腰砕け。そのギャップがかえって愛される名リーダー。",
+    tip: "怖がりは危機察知能力の高さ。ビビりを隠さず笑いに変えれば、もっと人望が集まるわよ。",
+    match: "💰 実家が太い偽ワル（NBCS）とは見栄の張り合いで意気投合" },
+  "NBCS": { emoji: "💰", name: "実家が太い偽ワル", catch: "ワルぶってるが、坊ちゃん",
+    mic: "夢はパチプロだぜ。負けても実家が太いから余裕よ。……あ、これパパには内緒な？",
+    desc: "軟派・クール・知略派の番長。ワルを気取るが実は良家のお坊ちゃんで、育ちの良さが端々に出る。喧嘩は弱いが金払いと人脈は最強。",
+    tip: "その育ちの良さは立派な武器。背伸びせず、持ち前の余裕でみんなを助ければ本物の顔役になれる。",
+    match: "👑 強奪系レディース女帝（KBAS）に色々“もらわれる”宿命" },
+  "NOAT": { emoji: "🗺️", name: "方向音痴の走り屋", catch: "夜の高速の帝王、道に迷う",
+    mic: "夜露死苦ゥ！今夜も高速を制圧…って、試合会場どこだよ！？地図逆じゃね！？迷ってエクスタシーどころじゃねぇ！",
+    desc: "軟派・熱血・武闘派の一匹狼ライダー。走りの根性と情熱は本物だが、極度の方向音痴で毎回目的地にたどり着けない。旅の過程を楽しむ天才。",
+    tip: "迷う才能は出会いの才能。ナビを入れれば無敵。でも、たまの寄り道もあんたらしくて悪くないぜ。",
+    match: "🍰 甘党すぎるスケバン（NOCT）とは寄り道グルメで意気投合" },
+  "NOAS": { emoji: "🤱", name: "ママ大好き夜露死苦マン", catch: "刺繍はゴツいが、マザコン",
+    mic: "俺に敵うヤツはいねぇ。試合？受けて立つ…あ、ママから電話。ちょっと待って。うん、今から帰る。門限だから。",
+    desc: "軟派・熱血・知略派の一匹狼。特攻服の刺繍は超ゴツいのに、ママが大好きで門限も守る。家族思いの優しさは、実はいちばんの強さ。",
+    tip: "家族愛は誇っていい長所。ママ譲りの優しさで仲間も守れば、街いちばんの人格者になれるぜ。",
+    match: "😭 情に厚すぎて泣く兄貴（NBAT）とは家族トークで号泣" },
+  "NOCT": { emoji: "🍰", name: "甘党すぎるスケバン", catch: "クールな女番長、スイーツに陥落",
+    mic: "アタシに勝てると思ってんの？試合決定でシバく…あ、そのパフェ半分ちょうだい。半分ね。半分。",
+    desc: "軟派・クール・武闘派の女番長。凛とした佇まいで一目置かれるが、スイーツを前にすると目がキラキラして陥落。強さと甘党のギャップが最高。",
+    tip: "好きなものに素直なのは魅力。甘いものは活力の源。堂々と食べて、堂々と強くいこうぜ。",
+    match: "🗺️ 方向音痴の走り屋（NOAT）とスイーツ巡りが最高に合う" },
+  "NOCS": { emoji: "😢", name: "めそめそレディース番長", catch: "この街の女番長、涙腺ゆるゆる",
+    mic: "アタシがこの街の女番長よ。かかってきな…ぐすっ…なんで泣いてるかって？…知らないわよっ…！",
+    desc: "軟派・クール・知略派の女番長。統率力と貫禄は本物なのに、ちょっとしたことですぐ涙目に。その繊細さが、実は妹分たちの心を掴んで離さない。",
+    tip: "涙は弱さじゃなく共感力の高さ。泣き虫な女番長、めちゃくちゃ愛されキャラよ。堂々と泣きな。",
+    match: "🤔 語彙力ゼロのクール参謀（KBCS）とは無言と涙で通じ合う" },
+};
+
+// ---------- SVGヤンキー（フォールバック用・チビ顔を描き分け） ----------
+const ART = {
+  KBAT: { skin:"#f0c9a0", hair:"pomp",  hairC:"#2b2b30", expr:"angrycry", acc:"tears" },
+  KBAS: { skin:"#e8bd93", hair:"long",  hairC:"#2b2b30", expr:"smug",     acc:"horns" },
+  KBCT: { skin:"#f0c9a0", hair:"long",  hairC:"#2b2b30", expr:"prim",     acc:"broom" },
+  KBCS: { skin:"#eec49a", hair:"long",  hairC:"#2b2b30", expr:"blank",    acc:"glasses" },
+  KOAT: { skin:"#f0c9a0", hair:"pomp",  hairC:"#4a3324", expr:"sorry",    acc:"sweat" },
+  KOAS: { skin:"#f0c9a0", hair:"bigpomp",hairC:"#3a2a1e",expr:"nervous",  acc:"coin" },
+  KOCT: { skin:"#f0c9a0", hair:"bald",  hairC:"#2b2b30", expr:"shy",      acc:"flower" },
+  KOCS: { skin:"#e8c39a", hair:"long",  hairC:"#2a2730", expr:"gloomy",   acc:"none" },
+  NBAT: { skin:"#e8bd93", hair:"slick", hairC:"#3a2a1e", expr:"happycry", acc:"chain" },
+  NBAS: { skin:"#f0c9a0", hair:"long",  hairC:"#c8952a", expr:"childish", acc:"game" },
+  NBCT: { skin:"#eec49a", hair:"long",  hairC:"#2b2b30", expr:"scared",   acc:"bug" },
+  NBCS: { skin:"#f2d0ab", hair:"neat",  hairC:"#5a4632", expr:"posh",     acc:"sparkleface" },
+  NOAT: { skin:"#e8bd93", hair:"biker", hairC:"#2b2b30", expr:"lost",     acc:"sweat" },
+  NOAS: { skin:"#f0c9a0", hair:"pomp",  hairC:"#2b2b30", expr:"mamahappy",acc:"heart" },
+  NOCT: { skin:"#f2d0ab", hair:"long",  hairC:"#3a2a1e", expr:"sparkle",  acc:"parfait" },
+  NOCS: { skin:"#f2d0ab", hair:"long",  hairC:"#2b2b30", expr:"teary",    acc:"tears" },
+};
+
+function hairSVG(style, c) {
+  switch (style) {
+    case "pomp": return '<path d="M32 44 Q30 8 60 14 Q92 10 88 44 Q80 26 60 26 Q40 26 32 44 Z" fill="'+c+'"/><path d="M50 20 Q60 6 74 16" stroke="'+c+'" stroke-width="7" fill="none" stroke-linecap="round"/>';
+    case "bigpomp": return '<path d="M28 46 Q22 2 60 10 Q98 2 92 46 Q82 22 60 22 Q38 22 28 46 Z" fill="'+c+'"/><path d="M44 16 Q60 -4 80 12" stroke="'+c+'" stroke-width="9" fill="none" stroke-linecap="round"/>';
+    case "slick": return '<path d="M32 46 Q30 16 60 16 Q90 16 88 46 Q84 30 60 30 Q36 30 32 46 Z" fill="'+c+'"/><path d="M34 34 Q50 24 70 30" stroke="rgba(255,255,255,.15)" stroke-width="3" fill="none"/>';
+    case "short": return '<path d="M34 44 Q34 20 60 20 Q86 20 86 44 Q80 30 60 30 Q40 30 34 44 Z" fill="'+c+'"/>';
+    case "neat": return '<path d="M34 44 Q34 18 60 18 Q86 18 86 44 Q82 28 60 28 Q38 28 34 44 Z" fill="'+c+'"/><path d="M58 20 L58 32" stroke="rgba(255,255,255,.2)" stroke-width="2"/>';
+    case "bald": return '<path d="M36 42 Q40 30 60 30 Q80 30 84 42" stroke="'+c+'" stroke-width="0" fill="none"/><path d="M50 34 l2 3 M64 33 l2 3 M57 30 l2 3" stroke="#c9a" stroke-width="1.2" opacity=".4"/>';
+    case "hood": return '<path d="M24 60 Q22 18 60 16 Q98 18 96 60 L96 44 Q90 30 60 30 Q30 30 24 44 Z" fill="'+c+'"/>';
+    case "biker": return '<path d="M28 40 Q28 12 60 12 Q92 12 92 40 L92 46 Q88 34 60 34 Q32 34 28 46 Z" fill="'+c+'"/><rect x="30" y="38" width="60" height="7" rx="3" fill="#4a4650"/>';
+    case "long": return '<path d="M28 46 Q26 14 60 14 Q94 14 92 46 L92 88 Q86 78 84 60 Q84 34 60 30 Q36 34 36 60 Q34 78 28 88 Z" fill="'+c+'"/>';
+    default: return "";
+  }
+}
+
+function accSVG(name) {
+  switch (name) {
+    case "tears": return '<path d="M46 62 Q44 74 47 82 Q50 74 48 62 Z" fill="#7cc4e8"/><path d="M74 62 Q72 74 75 82 Q78 74 76 62 Z" fill="#7cc4e8"/>';
+    case "sweat": return '<path d="M86 40 Q90 48 86.5 54 Q82 49 83 43 Z" fill="#7cc4e8"/>';
+    case "horns": return '<path d="M34 30 L28 16 L42 26 Z" fill="#c0392b"/><path d="M86 30 L92 16 L78 26 Z" fill="#c0392b"/>';
+    case "broom": return '<rect x="92" y="60" width="4" height="40" rx="2" fill="#9a6a3a" transform="rotate(12 94 80)"/><path d="M95 98 l10 3 l-3 12 l-12 -3 z" fill="#e3b23c" transform="rotate(12 98 105)"/>';
+    case "glasses": return '<circle cx="47" cy="60" r="10" fill="rgba(255,255,255,.12)" stroke="#e3b23c" stroke-width="2.5"/><circle cx="73" cy="60" r="10" fill="rgba(255,255,255,.12)" stroke="#e3b23c" stroke-width="2.5"/><path d="M57 60 Q60 56 63 60" stroke="#e3b23c" stroke-width="2.5" fill="none"/>';
+    case "coin": return '<circle cx="94" cy="92" r="8" fill="#e3b23c" stroke="#c8952a" stroke-width="1.5"/><text x="94" y="96" font-size="9" text-anchor="middle" fill="#8a6a1a" font-family="sans-serif">¥</text>';
+    case "flower": return '<g transform="translate(90,40)"><circle cx="0" cy="-4" r="3" fill="#f6a5c0"/><circle cx="4" cy="-1" r="3" fill="#f6a5c0"/><circle cx="2.5" cy="3.5" r="3" fill="#f6a5c0"/><circle cx="-2.5" cy="3.5" r="3" fill="#f6a5c0"/><circle cx="-4" cy="-1" r="3" fill="#f6a5c0"/><circle r="2.6" fill="#e3b23c"/></g>';
+    case "chain": return '<path d="M42 96 Q60 106 78 96" stroke="#e3b23c" stroke-width="4" fill="none"/><circle cx="60" cy="103" r="4" fill="#e3b23c"/>';
+    case "game": return '<rect x="84" y="86" width="22" height="13" rx="3" fill="#3a3342" transform="rotate(-12 95 92)"/><circle cx="90" cy="92" r="2" fill="#d64545" transform="rotate(-12 95 92)"/>';
+    case "bug": return '<g transform="translate(94,44)"><ellipse cx="0" cy="0" rx="4" ry="5.5" fill="#3a3342"/><path d="M-4 -2 L-9 -5 M4 -2 L9 -5 M-4 2 L-9 3 M4 2 L9 3" stroke="#3a3342" stroke-width="1.4"/></g>';
+    case "sparkleface": return '<path d="M20 34 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5 z" fill="#e3b23c"/><path d="M98 40 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z" fill="#e3b23c"/>';
+    case "heart": { const h='M5 2 C5 0 8 0 8 2.5 C8 0 11 0 11 2 C11 4.5 8 7 8 7 C8 7 5 4.5 5 2 Z'; return '<path transform="translate(90,34) scale(1.4)" d="'+h+'" fill="#d64545"/>'; }
+    case "parfait": return '<g transform="translate(92,92)"><path d="M-6 -8 L6 -8 L3 8 Q0 11 -3 8 Z" fill="#fff" stroke="#e3b23c" stroke-width="1.2"/><circle cx="0" cy="-10" r="4" fill="#f6a5c0"/><circle cx="0" cy="-14" r="2" fill="#d64545"/></g>';
+    default: return "";
+  }
+}
+
+function eyesMouthSVG(expr) {
+  let s = "";
+  const browAngry = '<path d="M40 46 L52 50 M80 46 L68 50" stroke="#3a2b1e" stroke-width="3" stroke-linecap="round"/>';
+  switch (expr) {
+    case "angrycry": s += browAngry + '<path d="M42 56 Q47 52 52 56 M68 56 Q73 52 78 56" stroke="#2f2740" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M52 72 Q60 76 68 72" stroke="#2f2740" stroke-width="2.5" fill="none" stroke-linecap="round"/>'; break;
+    case "smug": s += '<path d="M42 54 L52 54 M68 54 L78 54" stroke="#2f2740" stroke-width="3" stroke-linecap="round"/><path d="M52 70 Q60 76 70 70" stroke="#2f2740" stroke-width="2.5" fill="none" stroke-linecap="round"/>'; break;
+    case "prim": s += '<circle cx="47" cy="56" r="3.4" fill="#2f2740"/><circle cx="73" cy="56" r="3.4" fill="#2f2740"/><path d="M54 70 L66 70" stroke="#2f2740" stroke-width="2.5" stroke-linecap="round"/>'; break;
+    case "blank": s += '<circle cx="47" cy="56" r="3" fill="#2f2740"/><circle cx="73" cy="56" r="3" fill="#2f2740"/><ellipse cx="60" cy="71" rx="4" ry="3" fill="#8a4a5c"/>'; break;
+    case "sorry": s += '<path d="M42 58 Q47 53 52 58 M68 58 Q73 53 78 58" stroke="#2f2740" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M52 73 Q60 69 68 73" stroke="#2f2740" stroke-width="2.5" fill="none" stroke-linecap="round"/>'; break;
+    case "nervous": s += '<circle cx="47" cy="56" r="3.2" fill="#2f2740"/><circle cx="73" cy="56" r="3.2" fill="#2f2740"/><path d="M50 71 Q60 68 70 71" stroke="#2f2740" stroke-width="2.5" fill="none" stroke-linecap="round"/>'; break;
+    case "shy": s += '<path d="M42 57 Q47 53 52 57 M68 57 Q73 53 78 57" stroke="#2f2740" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M54 71 Q60 75 66 71" stroke="#2f2740" stroke-width="2.5" fill="none" stroke-linecap="round"/>'; break;
+    case "gloomy": s += '<path d="M42 58 L52 55 M68 55 L78 58" stroke="#2f2740" stroke-width="3" stroke-linecap="round"/><circle cx="49" cy="58" r="2.6" fill="#2f2740"/><circle cx="71" cy="58" r="2.6" fill="#2f2740"/><path d="M54 72 Q60 70 66 72" stroke="#2f2740" stroke-width="2.3" fill="none" stroke-linecap="round"/>'; break;
+    case "happycry": s += '<path d="M42 56 Q47 51 52 56 M68 56 Q73 51 78 56" stroke="#2f2740" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 70 Q60 78 70 70" stroke="#2f2740" stroke-width="2.6" fill="none" stroke-linecap="round"/>'; break;
+    case "childish": s += '<circle cx="47" cy="55" r="4" fill="#2f2740"/><circle cx="73" cy="55" r="4" fill="#2f2740"/><circle cx="48.5" cy="53.5" r="1.3" fill="#fff"/><circle cx="74.5" cy="53.5" r="1.3" fill="#fff"/><path d="M50 68 Q60 78 70 68 Z" fill="#8a4a5c"/>'; break;
+    case "scared": s += '<circle cx="47" cy="57" r="4.2" fill="#fff" stroke="#2f2740" stroke-width="1.5"/><circle cx="73" cy="57" r="4.2" fill="#fff" stroke="#2f2740" stroke-width="1.5"/><circle cx="47" cy="57" r="1.8" fill="#2f2740"/><circle cx="73" cy="57" r="1.8" fill="#2f2740"/><ellipse cx="60" cy="72" rx="5" ry="4" fill="#8a4a5c"/>'; break;
+    case "posh": s += '<path d="M42 55 L52 53 M68 53 L78 55" stroke="#2f2740" stroke-width="2.6" stroke-linecap="round"/><circle cx="48" cy="56" r="2.6" fill="#2f2740"/><circle cx="72" cy="56" r="2.6" fill="#2f2740"/><path d="M52 70 Q60 74 70 69" stroke="#2f2740" stroke-width="2.4" fill="none" stroke-linecap="round"/>'; break;
+    case "lost": s += '<path d="M43 55 Q47 58 51 55 M69 55 Q73 58 77 55" stroke="#2f2740" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M55 71 Q60 68 65 71" stroke="#2f2740" stroke-width="2.4" fill="none" stroke-linecap="round"/><text x="88" y="30" font-size="12" fill="#e3b23c" font-family="sans-serif">?</text>'; break;
+    case "mamahappy": s += '<path d="M42 56 Q47 51 52 56 M68 56 Q73 51 78 56" stroke="#2f2740" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M52 70 Q60 76 68 70" stroke="#2f2740" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M46 64 Q44 70 47 74 Q50 70 48 64 Z" fill="#7cc4e8"/>'; break;
+    case "sparkle": s += '<circle cx="47" cy="56" r="4.4" fill="#2f2740"/><circle cx="73" cy="56" r="4.4" fill="#2f2740"/><circle cx="48.6" cy="54" r="1.5" fill="#fff"/><circle cx="74.6" cy="54" r="1.5" fill="#fff"/><path d="M54 70 Q60 76 66 70" stroke="#2f2740" stroke-width="2.5" fill="none" stroke-linecap="round"/>'; break;
+    case "teary": s += '<circle cx="47" cy="57" r="4" fill="#2f2740"/><circle cx="73" cy="57" r="4" fill="#2f2740"/><circle cx="48.4" cy="55.5" r="1.3" fill="#fff"/><circle cx="74.4" cy="55.5" r="1.3" fill="#fff"/><path d="M55 72 Q60 70 65 72" stroke="#2f2740" stroke-width="2.3" fill="none" stroke-linecap="round"/>'; break;
+    default: s += '<circle cx="47" cy="56" r="3" fill="#2f2740"/><circle cx="73" cy="56" r="3" fill="#2f2740"/><path d="M54 70 Q60 74 66 70" stroke="#2f2740" stroke-width="2.4" fill="none" stroke-linecap="round"/>';
+  }
+  return s;
+}
+
+function yankeeSVG(code) {
+  const c = ART[code];
+  if (!c) return "";
+  let s = "";
+  // 特攻服の襟（黒×金×赤）
+  s += '<path d="M30 118 L30 96 Q60 108 90 96 L90 118 Z" fill="#1c1a22"/>';
+  s += '<path d="M40 118 L40 100 Q60 108 80 100 L80 118 Z" fill="#2b2733"/>';
+  s += '<path d="M30 96 L46 108 L42 118 L30 118 Z" fill="#0f0e13"/>';
+  s += '<path d="M90 96 L74 108 L78 118 L90 118 Z" fill="#0f0e13"/>';
+  s += '<path d="M46 108 L60 104 L74 108 L60 116 Z" fill="#c0392b"/>';
+  s += '<path d="M31 98 Q60 110 89 98" stroke="#e3b23c" stroke-width="1.6" fill="none"/>';
+  // 首・顔
+  s += '<rect x="53" y="86" width="14" height="12" fill="'+c.skin+'"/>';
+  s += '<ellipse cx="60" cy="60" rx="30" ry="32" fill="'+c.skin+'" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>';
+  // 耳
+  s += '<circle cx="31" cy="62" r="5" fill="'+c.skin+'"/><circle cx="89" cy="62" r="5" fill="'+c.skin+'"/>';
+  // 髪
+  s += hairSVG(c.hair, c.hairC);
+  // ほっぺ
+  s += '<ellipse cx="40" cy="70" rx="5" ry="3.2" fill="#e8899a" opacity=".5"/><ellipse cx="80" cy="70" rx="5" ry="3.2" fill="#e8899a" opacity=".5"/>';
+  // 目・口（表情）
+  s += eyesMouthSVG(c.expr);
+  // 小物
+  s += accSVG(c.acc);
+  return '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img">' + s + '</svg>';
+}
+
+// AI画像（img/コード.png）優先、失敗時はSVG
+function typeArt(code) {
+  return '<img src="img/' + code + '.png" alt="" onerror="this.outerHTML = yankeeSVG(\'' + code + '\')">';
+}
+
+// ---------- state ----------
+let answers = [];
+let currentQ = 0;
+let uName = "";
+let lastResult = null;
+const $ = (id) => document.getElementById(id);
+
+function show(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function startQuiz() {
+  uName = $("uname").value.trim() || "あんた";
+  answers = []; currentQ = 0;
+  show("screen-quiz"); renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  $("progress-fill").style.width = (currentQ / QUESTIONS.length * 100) + "%";
+  $("progress-text").textContent = "Q" + (currentQ + 1) + " / " + QUESTIONS.length;
+  $("q-emoji").textContent = q.emoji;
+  $("q-text").textContent = q.text;
+  const box = $("q-options"); box.innerHTML = "";
+  [q.a, q.b].forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "opt"; btn.textContent = opt.t;
+    btn.onclick = () => answer(opt.p);
+    box.appendChild(btn);
+  });
+  $("q-back").style.visibility = currentQ === 0 ? "hidden" : "visible";
+}
+
+function answer(pole) {
+  answers[currentQ] = pole; currentQ++;
+  if (currentQ >= QUESTIONS.length) finish(); else renderQuestion();
+}
+function goBack() { if (currentQ > 0) { currentQ--; renderQuestion(); } }
+
+function finish() {
+  const counts = {};
+  answers.forEach(p => counts[p] = (counts[p] || 0) + 1);
+  let code = ""; const ratios = [];
+  AXES.forEach(ax => {
+    const l = counts[ax.left.key] || 0, r = counts[ax.right.key] || 0;
+    code += (l >= r) ? ax.left.key : ax.right.key;
+    ratios.push(r / (l + r));
+  });
+  lastResult = { code, ratios };
+  renderResult(); show("screen-result");
+}
+
+function renderResult() {
+  const t = TYPES[lastResult.code];
+  $("result-for").textContent = uName + " の中のヤンキーは…";
+  $("result-emoji").innerHTML = typeArt(lastResult.code);
+  $("result-code").textContent = lastResult.code.split("").join(" ");
+  $("result-name").textContent = t.name;
+  $("result-catch").textContent = t.catch;
+  $("result-mic").textContent = "「" + t.mic + "」";
+  $("result-desc").textContent = t.desc;
+  $("result-tip").textContent = t.tip;
+  $("result-match").textContent = t.match;
+  const bars = $("axis-bars"); bars.innerHTML = "";
+  AXES.forEach((ax, i) => {
+    const row = document.createElement("div");
+    row.className = "axis-row";
+    const pos = 15 + lastResult.ratios[i] * 70;
+    row.innerHTML = '<span class="lab">' + ax.left.label + '</span>' +
+      '<span class="axis-track"><span class="axis-dot" style="left:' + pos + '%"></span></span>' +
+      '<span class="lab r">' + ax.right.label + '</span>';
+    bars.appendChild(row);
+  });
+}
+
+function restart() { show("screen-start"); }
+function backToTop() { show(lastResult ? "screen-result" : "screen-start"); }
+
+function showAllTypes() {
+  const grid = $("type-grid"); grid.innerHTML = "";
+  Object.entries(TYPES).forEach(([code, t]) => {
+    const cell = document.createElement("div");
+    cell.className = "type-cell";
+    cell.innerHTML = '<div class="te">' + typeArt(code) + '</div>' +
+      '<div class="tc">' + code.split("").join(" ") + '</div>' +
+      '<div class="tn">' + t.name + '</div>';
+    grid.appendChild(cell);
+  });
+  show("screen-all");
+}
+
+// ---------- share ----------
+function shareText() {
+  const t = TYPES[lastResult.code];
+  return uName + " の中のヤンキーは『" + t.name + "』だったぜ " + t.emoji + "\n「" + t.mic + "」\n#ヤンキータイプ診断";
+}
+function shareUrl() { return "https://yankee.soter-info.com/t/" + lastResult.code + ".html"; }
+function shareX() {
+  window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText()) + "&url=" + encodeURIComponent(shareUrl()), "_blank");
+}
+function shareLine() {
+  window.open("https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent(shareUrl()) + "&text=" + encodeURIComponent(shareText()), "_blank");
+}
+function copyResult() {
+  navigator.clipboard.writeText(shareText() + "\n" + shareUrl()).then(() => toast("結果をコピーしたぜ 🔥")).catch(() => toast("コピーできなかった…"));
+}
+
+function saveResultImage() {
+  const code = lastResult.code, t = TYPES[code];
+  const cv = document.createElement("canvas");
+  cv.width = 1080; cv.height = 1080;
+  const ctx = cv.getContext("2d");
+  ctx.fillStyle = "#17141b"; ctx.fillRect(0, 0, 1080, 1080);
+  ctx.fillStyle = "#e3b23c"; ctx.fillRect(0, 0, 1080, 12); ctx.fillRect(0, 1068, 1080, 12);
+  ctx.fillStyle = "#d64545"; ctx.fillRect(0, 16, 1080, 5); ctx.fillRect(0, 1059, 1080, 5);
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#a79c8c"; ctx.font = "bold 38px sans-serif";
+  ctx.fillText("🔥 ヤンキータイプ診断 🔥", 540, 100);
+  ctx.fillStyle = "#f3eee4"; ctx.font = "bold 48px sans-serif";
+  ctx.fillText(uName + " の中のヤンキーは…", 540, 180);
+  const draw = (img) => {
+    if (img) ctx.drawImage(img, 300, 210, 480, 480);
+    ctx.fillStyle = "#d64545"; ctx.font = "bold 40px sans-serif";
+    ctx.fillText(code.split("").join(" "), 540, 745);
+    ctx.fillStyle = "#e3b23c"; ctx.font = "bold 76px sans-serif";
+    // 長いタイプ名は縮小
+    let name = "『" + t.name + "』";
+    ctx.font = (name.length > 12 ? "bold 52px" : "bold 72px") + " sans-serif";
+    ctx.fillText(name, 540, 838);
+    // 決め台詞（折り返し）
+    ctx.fillStyle = "#f3eee4"; ctx.font = "bold 34px sans-serif";
+    const mic = "「" + t.mic + "」";
+    wrapText(ctx, mic, 540, 910, 960, 44);
+    ctx.fillStyle = "#6b6273"; ctx.font = "bold 30px sans-serif";
+    ctx.fillText("yankee.soter-info.com", 540, 1038);
+    cv.toBlob(async (blob) => {
+      if (!blob) { toast("画像の生成に失敗した"); return; }
+      const file = new File([blob], "yankee-" + code + ".png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file], text: shareText() }); return; }
+        catch (e) { if (e.name === "AbortError") return; }
+      }
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
+      URL.revokeObjectURL(a.href); toast("画像を保存したぜ 🔥");
+    }, "image/png");
+  };
+  const img = new Image();
+  img.onload = () => draw(img);
+  img.onerror = () => {
+    const svg = yankeeSVG(code);
+    const b = new Blob([svg], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(b);
+    const im2 = new Image();
+    im2.onload = () => { draw(im2); URL.revokeObjectURL(url); };
+    im2.onerror = () => draw(null);
+    im2.src = url;
+  };
+  img.src = "img/" + code + ".png";
+}
+
+function wrapText(ctx, text, x, y, maxW, lh) {
+  const chars = [...text]; let line = "", ly = y;
+  for (const ch of chars) {
+    if (ctx.measureText(line + ch).width > maxW && line) { ctx.fillText(line, x, ly); line = ch; ly += lh; }
+    else line += ch;
+  }
+  if (line) ctx.fillText(line, x, ly);
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const el = $("toast"); el.textContent = msg; el.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+// トップのイラスト
+$("hero-emoji").innerHTML = typeArt("KOAS");
+
+// シェアURL（?type=XXXX）着地
+(function () {
+  const st = new URLSearchParams(location.search).get("type");
+  if (st && TYPES[st]) {
+    uName = "こいつ";
+    lastResult = { code: st, ratios: st.split("").map((ch, i) => (ch === AXES[i].right.key ? 0.8 : 0.2)) };
+    renderResult();
+    $("result-for").textContent = "シェアされた結果：『" + TYPES[st].name + "』";
+    show("screen-result");
+  }
+})();
+</script>
+</body>
+</html>
