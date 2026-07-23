@@ -12,7 +12,7 @@
 - **ビルド不要の静的サイト**。`index.html` 1ファイルに HTML/CSS/JS 全部入り（フレームワーク・npm依存なし）。
 - ホスティングは **GitHub Pages**（`main` ブランチのルートを配信）。`git push` で自動デプロイ。
 - イラストは `img/<CODE>.png` を表示、読み込み失敗時は JS内蔵のSVG（`yankeeSVG()`）にフォールバック。
-- テーマは黒×金×赤（特攻服イメージ）。GA4は未設置（TODO）。
+- テーマは黒×金×赤（特攻服イメージ）。GA4計測 G-19S2DCEHMR 導入済み。
 
 ## ファイル構成
 
@@ -71,7 +71,7 @@ gh api repos/sterakura-cell/yankee-shindan/pages/builds/latest --jq .status  # "
 - `CNAME` に `yankee.soter-info.com`。DNSは **Squarespace Domains**（CNAME yankee→sterakura-cell.github.io）。HTTPS強制済み。
 
 ## TODO
-- GA4計測タグ未設置（他サイトは導入済み）。
+- （なし）全項目対応済み。
 
 ## リポジトリ
 `sterakura-cell/yankee-shindan`（public）。
