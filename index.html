@@ -17,7 +17,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ヤンキータイプ診断 🔥 あなたの中のヤンキー、何型？">
-<meta name="twitter:description" content="12問で判定！強面×残念ギャップの16タイプ診断。決め台詞つき。">
+<meta name="twitter:description" content="12問で判定！あなたは特攻隊長？めそめそレディース番長？強面×残念ギャップの16タイプ診断。">
 <meta name="twitter:image" content="https://yankee.soter-info.com/og.png">
 <link rel="canonical" href="https://yankee.soter-info.com/">
 <script type="application/ld+json">
@@ -191,6 +191,13 @@
 
   .cross-link { text-align: center; margin-top: 18px; font-size: 13.5px; color: var(--text-light); line-height: 2; }
   .cross-link a { color: var(--gold); font-weight: bold; }
+  .cross-promo { margin-top: 22px; padding-top: 20px; border-top: 1px dashed var(--border); }
+  .cross-promo-title { text-align: center; font-size: 13px; font-weight: bold; color: var(--text-light); margin-bottom: 12px; }
+  .cross-promo-row { display: flex; gap: 8px; }
+  .cross-promo-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 4px; border-radius: 14px; text-decoration: none; font-weight: bold; border: 1.5px solid var(--gold); color: var(--gold); background: var(--card2); transition: transform .15s ease, box-shadow .15s ease; }
+  .cross-promo-btn .em { font-size: 26px; line-height: 1; }
+  .cross-promo-btn .nm { font-size: 12px; }
+  .cross-promo-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
   footer { width: 100%; max-width: 520px; padding: 0 20px 28px; font-size: 10.5px; color: #6b6273; text-align: center; line-height: 1.8; }
   footer b { color: #8a8094; }
   .toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); background: var(--gold); color: #17141b; font-size: 13px; font-weight: bold; padding: 10px 22px; border-radius: 999px; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 10; }
@@ -260,7 +267,14 @@
 
       <button class="btn secondary" onclick="restart()">もう一度診断する</button>
       <button class="btn ghost" onclick="showAllTypes()">全16タイプを見てみる</button>
-      <div class="cross-link">ほかの診断もどうぞ 🔥<br><a href="https://wanko.soter-info.com/">🐶わんこ</a> ／ <a href="https://neko.soter-info.com/">🐱にゃんこ</a> ／ <a href="https://yorushoku.soter-info.com/">🍾夜職</a></div>
+      <div class="cross-promo">
+        <div class="cross-promo-title">🎁 ほかのタイプ診断もやってみる</div>
+        <div class="cross-promo-row">
+          <a class="cross-promo-btn" href="https://wanko.soter-info.com/" target="_blank" rel="noopener"><span class="em">🐶</span><span class="nm">わんこ</span></a>
+          <a class="cross-promo-btn" href="https://neko.soter-info.com/" target="_blank" rel="noopener"><span class="em">🐱</span><span class="nm">にゃんこ</span></a>
+          <a class="cross-promo-btn" href="https://yorushoku.soter-info.com/" target="_blank" rel="noopener"><span class="em">🍾</span><span class="nm">夜職</span></a>
+        </div>
+      </div>
     </section>
 
     <!-- ALL TYPES -->
