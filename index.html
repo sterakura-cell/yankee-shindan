@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ヤンキータイプ診断 🔥 あなたの中のヤンキー、何型？</title>
 <meta name="description" content="12問に答えるだけで、あなたの中に眠るヤンキーを16タイプに分類。強面なのに中身は残念…？決め台詞つきで診断します。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="icon" type="image/png" href="img/KOAS.png">
 <link rel="apple-touch-icon" href="img/KOAS.png">
 <meta property="og:type" content="website">
@@ -15,13 +16,14 @@
 <meta property="og:image" content="https://yankee.soter-info.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ヤンキータイプ診断 🔥 あなたの中のヤンキー、何型？">
 <meta name="twitter:description" content="12問で判定！あなたは特攻隊長？めそめそレディース番長？強面×残念ギャップの16タイプ診断。">
 <meta name="twitter:image" content="https://yankee.soter-info.com/og.png">
 <link rel="canonical" href="https://yankee.soter-info.com/">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"ヤンキータイプ診断","alternateName":"あなたの中のヤンキー診断","url":"https://yankee.soter-info.com/","description":"12問に答えるだけで、あなたの中のヤンキーを16タイプに分類する無料のネタ診断。決め台詞つき。","applicationCategory":"EntertainmentApplication","operatingSystem":"Web","inLanguage":"ja","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://yankee.soter-info.com/#website","url":"https://yankee.soter-info.com/","name":"ヤンキータイプ診断","inLanguage":"ja"},{"@type":"WebApplication","@id":"https://yankee.soter-info.com/#app","name":"ヤンキータイプ診断","alternateName":"あなたの中のヤンキー診断","url":"https://yankee.soter-info.com/","description":"12問から、硬派・軟派、番長・一匹狼、熱血・クール、武闘派・知略派の4軸で16タイプに分類する無料のエンターテインメント診断。","applicationCategory":"EntertainmentApplication","operatingSystem":"Web","inLanguage":"ja","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"FAQPage","@id":"https://yankee.soter-info.com/#faq","mainEntity":[{"@type":"Question","name":"ヤンキータイプ診断とは？","acceptedAnswer":{"@type":"Answer","text":"12問に答え、4つのオリジナル軸から16種類の架空のヤンキータイプに分類する無料のエンターテインメント診断です。"}},{"@type":"Question","name":"診断にはどのくらい時間がかかりますか？","acceptedAnswer":{"@type":"Answer","text":"質問は全12問で、目安は約2分です。"}},{"@type":"Question","name":"実在人物や団体を評価する診断ですか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。実在人物・団体とは関係のないフィクションのエンターテインメントコンテンツです。"}}]}]}
 </script>
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-19S2DCEHMR"></script>
@@ -198,6 +200,15 @@
   .cross-promo-btn .em { font-size: 26px; line-height: 1; }
   .cross-promo-btn .nm { font-size: 12px; }
   .cross-promo-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+  .about-diagnosis { margin-top: 22px; padding: 24px 22px; border: 1.5px solid var(--border); border-radius: 14px; background: rgba(34,29,41,.92); box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+  .about-diagnosis h2 { margin: 0 0 10px; font-size: 20px; color: var(--gold); }
+  .about-diagnosis h3 { margin: 20px 0 7px; font-size: 15px; color: var(--text); }
+  .about-diagnosis p, .about-diagnosis li { font-size: 13.5px; line-height: 1.85; }
+  .about-diagnosis ul { margin: 8px 0 0; padding-left: 1.25em; }
+  .about-diagnosis details { border-top: 1px dashed var(--border); padding: 12px 0; }
+  .about-diagnosis details:last-child { padding-bottom: 0; }
+  .about-diagnosis summary { cursor: pointer; font-size: 13.5px; font-weight: bold; color: var(--gold); }
+  .about-diagnosis details p { margin: 8px 0 0; }
   footer { width: 100%; max-width: 520px; padding: 0 20px 28px; font-size: 10.5px; color: #6b6273; text-align: center; line-height: 1.8; }
   footer b { color: #8a8094; }
   .toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); background: var(--gold); color: #17141b; font-size: 13px; font-weight: bold; padding: 10px 22px; border-radius: 999px; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 10; }
@@ -284,6 +295,15 @@
       <button class="btn secondary" onclick="backToTop()">トップに戻る</button>
     </section>
   </div>
+  <section class="about-diagnosis" aria-labelledby="about-diagnosis-title">
+    <h2 id="about-diagnosis-title">ヤンキータイプ診断とは？</h2>
+    <p>12問への回答から、4つのオリジナル軸で「あなたの中のヤンキー」を16タイプに分類する、無料のエンターテインメント診断です。</p>
+    <h3>診断で見る4つの軸</h3>
+    <ul><li>スタンス：硬派／軟派</li><li>立ち位置：番長／一匹狼</li><li>気質：熱血／クール</li><li>戦い方：武闘派／知略派</li></ul>
+    <h3>よくある質問</h3>
+    <details><summary>診断にはどのくらい時間がかかりますか？</summary><p>質問は全12問で、目安は約2分です。</p></details>
+    <details><summary>実在人物や団体を評価する診断ですか？</summary><p>いいえ。実在人物・団体とは関係のないフィクションで、暴力や犯罪行為を推奨するものでもありません。</p></details>
+  </section>
 </div>
 
 <footer>

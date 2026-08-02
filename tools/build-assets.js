@@ -53,13 +53,14 @@ function bars(dst,W,H){
     fs.writeFileSync(path.join(ROOT,"card",code+".png"),PNG.sync.write(card));
     const name=CONFIG.names[code],title="あなたの中のヤンキーは『"+name+"』でした！";
     const desc="12問で判定！強面×残念ギャップの16タイプ診断。あなたはどのヤンキー？ "+CONFIG.hashtag;
-    const html='<!DOCTYPE html>\n<html lang="ja">\n<head>\n<meta charset="UTF-8">\n<title>'+title+'｜'+CONFIG.siteName+'</title>\n'+
-      '<meta property="og:type" content="website">\n<meta property="og:site_name" content="'+CONFIG.siteName+'">\n'+
+    const html='<!DOCTYPE html>\n<html lang="ja">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>'+title+'｜'+CONFIG.siteName+'</title>\n'+
+      '<meta name="description" content="'+desc+'">\n<meta name="robots" content="noindex,follow">\n'+
+      '<meta property="og:type" content="website">\n<meta property="og:site_name" content="'+CONFIG.siteName+'">\n<meta property="og:locale" content="ja_JP">\n'+
       '<meta property="og:title" content="'+title+'">\n<meta property="og:description" content="'+desc+'">\n'+
       '<meta property="og:url" content="'+CONFIG.domain+'/t/'+code+'.html">\n<meta property="og:image" content="'+CONFIG.domain+'/card/'+code+'.png">\n'+
       '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'+
-      '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="'+title+'">\n<meta name="twitter:image" content="'+CONFIG.domain+'/card/'+code+'.png">\n'+
-      '<meta http-equiv="refresh" content="0; url=/?type='+code+'">\n<link rel="icon" type="image/png" href="/img/'+CONFIG.faviconCode+'.png">\n</head>\n'+
+      '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="'+title+'">\n<meta name="twitter:description" content="'+desc+'">\n<meta name="twitter:image" content="'+CONFIG.domain+'/card/'+code+'.png">\n'+
+      '<link rel="canonical" href="'+CONFIG.domain+'/">\n<meta http-equiv="refresh" content="0; url=/?type='+code+'">\n<link rel="icon" type="image/png" href="/img/'+CONFIG.faviconCode+'.png">\n</head>\n'+
       '<body><p><a href="/?type='+code+'">'+CONFIG.siteName+'で結果を見る</a></p></body>\n</html>\n';
     fs.writeFileSync(path.join(ROOT,"t",code+".html"),html);
   }

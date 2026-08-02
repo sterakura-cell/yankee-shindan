@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yankee.soter-info.com/sitemap.xml
