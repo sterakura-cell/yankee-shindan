@@ -281,9 +281,9 @@
       <div class="cross-promo">
         <div class="cross-promo-title">🎁 ほかのタイプ診断もやってみる</div>
         <div class="cross-promo-row">
-          <a class="cross-promo-btn" href="https://wanko.soter-info.com/" target="_blank" rel="noopener"><span class="em">🐶</span><span class="nm">わんこ</span></a>
-          <a class="cross-promo-btn" href="https://neko.soter-info.com/" target="_blank" rel="noopener"><span class="em">🐱</span><span class="nm">にゃんこ</span></a>
-          <a class="cross-promo-btn" href="https://yorushoku.soter-info.com/" target="_blank" rel="noopener"><span class="em">🍾</span><span class="nm">夜職</span></a>
+          <a class="cross-promo-btn" href="https://wanko.soter-info.com/" target="_blank" rel="noopener" onclick="track('result_cta_click',{destination:'wanko',type_code:lastResult?lastResult.code:''})"><span class="em">🐶</span><span class="nm">わんこ</span></a>
+          <a class="cross-promo-btn" href="https://neko.soter-info.com/" target="_blank" rel="noopener" onclick="track('result_cta_click',{destination:'neko',type_code:lastResult?lastResult.code:''})"><span class="em">🐱</span><span class="nm">にゃんこ</span></a>
+          <a class="cross-promo-btn" href="https://yorushoku.soter-info.com/" target="_blank" rel="noopener" onclick="track('result_cta_click',{destination:'yorushoku',type_code:lastResult?lastResult.code:''})"><span class="em">🍾</span><span class="nm">夜職</span></a>
         </div>
       </div>
     </section>
@@ -648,7 +648,10 @@ function renderResult() {
   });
 }
 
-function restart() { show("screen-start"); }
+function restart() {
+  track("retake_click", { from: "result", type_code: lastResult ? lastResult.code : "" });
+  show("screen-start");
+}
 function backToTop() { show(lastResult ? "screen-result" : "screen-start"); }
 
 function showAllTypes() {
@@ -670,22 +673,27 @@ function shareText() {
   return uName + " の中のヤンキーは『" + t.name + "』だったぜ " + t.emoji + "\n「" + t.mic + "」\n#ヤンキータイプ診断";
 }
 function shareUrl() { return "https://yankee.soter-info.com/t/" + lastResult.code + ".html"; }
+function trackShare(method) {
+  const params = { method, type_code: lastResult ? lastResult.code : "" };
+  track("share", params);
+  track("share_result", params);
+}
 function shareX() {
-  track("share", { method: "x", type_code: lastResult ? lastResult.code : "" });
+  trackShare("x");
   window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText()) + "&url=" + encodeURIComponent(shareUrl()), "_blank");
 }
 function shareLine() {
-  track("share", { method: "line", type_code: lastResult ? lastResult.code : "" });
+  trackShare("line");
   window.open("https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent(shareUrl()) + "&text=" + encodeURIComponent(shareText()), "_blank");
 }
 function copyResult() {
-  track("share", { method: "copy", type_code: lastResult ? lastResult.code : "" });
+  trackShare("copy");
   navigator.clipboard.writeText(shareText() + "\n" + shareUrl()).then(() => toast("結果をコピーしたぜ 🔥")).catch(() => toast("コピーできなかった…"));
 }
 
 function saveResultImage() {
   const code = lastResult.code, t = TYPES[code];
-  track("share", { method: "save_image", type_code: code });
+  trackShare("save_image");
   const cv = document.createElement("canvas");
   cv.width = 1080; cv.height = 1080;
   const ctx = cv.getContext("2d");
